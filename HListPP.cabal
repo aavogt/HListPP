@@ -5,10 +5,24 @@ description:         A preprocessor that replaces @`longDescriptiveName@ with
                     .
                      > hLens' (Label :: Label "longDescriptiveName")
                     .
-                     Use with ghc flags @-F -pgmF HListPP@, which can
-                     be added per-file with a pragma:
+                     Use with ghc flags @-F -pgmF HListPP@. A file using HListPP
+                     could start with something like
                     .
                      > ❴-# OPTIONS_GHC -F -pgmF HListPP #-❵ -- change braces to ascii (haddock doesn't allow literal comments in files)
+                     > ❴-# LANGUAGE DataKinds #-❵
+                     > import Data.HList.CommonMain
+                     > import Control.Lens
+                    .
+                     Then the labels can then be used in expressions with types
+                     like:
+                    .
+                     > `x :: Lens (Record S) (Record T) a b
+                     > `x :: Prism (Variant S) (Variant T) a b
+                     > `a .==. "x" .*.
+                     >    `b .==. "y" .*. emptyRecord :: Record [ Tagged "a" String, Tagged "b" String ]
+                    .
+                     where @S@ is a type-level list containing a @Tagged "x" a@
+                     and @T@ is a type-level list containing a @Tagged "x" b@.
                     .
                      Note that @`labels@ is expanded to something that
                      takes up about 26 more columns. To avoid issues with
