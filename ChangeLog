@@ -1,0 +1,19 @@
+Apr 17 2020
+Release 0.2.2
+Remove applicative-quoters dependency in favor of -XApplicativeDo, which
+restricts use to GHC>=8.0.1
+
+Move to http://github.com/aavogt/HListPP
+
+Nov 6 2015
+Release 0.2.1
+
+Change base dependency bounds
+
+May 28 2014
+Release 0.2
+Report filename given an error.
+Avoid parsing within comments.
+
+May 20 2014
+Initial release 0.1
